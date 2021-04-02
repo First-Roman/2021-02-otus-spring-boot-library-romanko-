@@ -1,0 +1,24 @@
+
+
+LLLLLLLLLLL             IIIIIIIIIIBBBBBBBBBBBBBBBBB   RRRRRRRRRRRRRRRRR                  AAA               RRRRRRRRRRRRRRRRR   YYYYYYY       YYYYYYY
+L:::::::::L             I::::::::IB::::::::::::::::B  R::::::::::::::::R                A:::A              R::::::::::::::::R  Y:::::Y       Y:::::Y
+L:::::::::L             I::::::::IB::::::BBBBBB:::::B R::::::RRRRRR:::::R              A:::::A             R::::::RRRRRR:::::R Y:::::Y       Y:::::Y
+LL:::::::LL             II::::::IIBB:::::B     B:::::BRR:::::R     R:::::R            A:::::::A            RR:::::R     R:::::RY::::::Y     Y::::::Y
+  L:::::L                 I::::I    B::::B     B:::::B  R::::R     R:::::R           A:::::::::A             R::::R     R:::::RYYY:::::Y   Y:::::YYY
+  L:::::L                 I::::I    B::::B     B:::::B  R::::R     R:::::R          A:::::A:::::A            R::::R     R:::::R   Y:::::Y Y:::::Y
+  L:::::L                 I::::I    B::::BBBBBB:::::B   R::::RRRRRR:::::R          A:::::A A:::::A           R::::RRRRRR:::::R     Y:::::Y:::::Y
+  L:::::L                 I::::I    B:::::::::::::BB    R:::::::::::::RR          A:::::A   A:::::A          R:::::::::::::RR       Y:::::::::Y
+  L:::::L                 I::::I    B::::BBBBBB:::::B   R::::RRRRRR:::::R        A:::::A     A:::::A         R::::RRRRRR:::::R       Y:::::::Y
+  L:::::L                 I::::I    B::::B     B:::::B  R::::R     R:::::R      A:::::AAAAAAAAA:::::A        R::::R     R:::::R       Y:::::Y
+  L:::::L                 I::::I    B::::B     B:::::B  R::::R     R:::::R     A:::::::::::::::::::::A       R::::R     R:::::R       Y:::::Y
+  L:::::L         LLLLLL  I::::I    B::::B     B:::::B  R::::R     R:::::R    A:::::AAAAAAAAAAAAA:::::A      R::::R     R:::::R       Y:::::Y
+LL:::::::LLLLLLLLL:::::LII::::::IIBB:::::BBBBBB::::::BRR:::::R     R:::::R   A:::::A             A:::::A   RR:::::R     R:::::R       Y:::::Y
+L::::::::::::::::::::::LI::::::::IB:::::::::::::::::B R::::::R     R:::::R  A:::::A               A:::::A  R::::::R     R:::::R    YYYY:::::YYYY
+L::::::::::::::::::::::LI::::::::IB::::::::::::::::B  R::::::R     R:::::R A:::::A                 A:::::A R::::::R     R:::::R    Y:::::::::::Y
+LLLLLLLLLLLLLLLLLLLLLLLLIIIIIIIIIIBBBBBBBBBBBBBBBBB   RRRRRRRR     RRRRRRRAAAAAAA                   AAAAAAARRRRRRRR     RRRRRRR    YYYYYYYYYYYYY
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 package ru.otus.library.sevices.genre;
 
-import ru.otus.library.domain.Genre;
+import ru.otus.library.models.Genre;
 
 import java.util.List;
 
@@ -10,4 +10,6 @@ public interface GenreService {
     Genre getGenreById(long id);
 
     List<Genre> getAllGenre();
+
+    void deleteGenreById(long id);
 }

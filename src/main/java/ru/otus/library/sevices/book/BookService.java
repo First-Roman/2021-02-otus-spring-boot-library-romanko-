@@ -1,8 +1,8 @@
 package ru.otus.library.sevices.book;
 
-import ru.otus.library.domain.Author;
-import ru.otus.library.domain.Book;
-import ru.otus.library.domain.Genre;
+import ru.otus.library.models.Author;
+import ru.otus.library.models.Book;
+import ru.otus.library.models.Genre;
 
 import java.util.List;
 

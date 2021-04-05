@@ -3,10 +3,7 @@ package ru.otus.library.repository.book;
 import org.springframework.stereotype.Repository;
 import ru.otus.library.models.Book;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
 
 @Repository
@@ -29,31 +26,24 @@ public class BookRepositoryJpa implements BookRepository {
     @Override
 
     public Book findById(long id) {
-        TypedQuery<Book> query = em.createQuery("select b from Book b " +
-                "join fetch b.author " +
-                "join fetch b.genre " +
-                "left join fetch b.comments where b.id = :id", Book.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+        return em.find(Book.class, id);
     }
 
     @Override
     public List<Book> findAll() {
-        TypedQuery<Book> query = em.createQuery("select b from Book b " +
-                "join fetch b.author " +
-                "join fetch b.genre " +
-                "left join fetch b.comments", Book.class);
+        EntityGraph<?> graph = em.createEntityGraph("book-author-genre-graph");
+        TypedQuery<Book> query = em.createQuery("select b from Book b ", Book.class);
+        query.setHint("javax.persistence.fetchgraph", graph);
         return query.getResultList();
     }
 
     @Override
     public List<Book> findByTitle(String title) {
+        EntityGraph<?> graph = em.createEntityGraph("book-author-genre-graph");
         TypedQuery<Book> query = em.createQuery("select b from Book b " +
-                "join fetch b.author " +
-                "join fetch b.genre " +
-                "left join fetch b.comments " +
                 "where b.title = :title", Book.class);
         query.setParameter("title", title);
+        query.setHint("javax.persistence.fetchgraph", graph);
         return query.getResultList();
     }
 
@@ -62,6 +52,7 @@ public class BookRepositoryJpa implements BookRepository {
         Query query = em.createQuery("delete from Book b where b.id = :id");
         query.setParameter("id", id);
         query.executeUpdate();
+        em.clear();
     }
 
 

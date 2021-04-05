@@ -28,9 +28,7 @@ public class CommentRepositoryJpa implements CommentRepository {
 
     @Override
     public Comment findById(long id) {
-        TypedQuery<Comment> query = em.createQuery("select c from Comment c where c.id = :id", Comment.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+        return em.find(Comment.class, id);
     }
 
     @Override
@@ -51,6 +49,7 @@ public class CommentRepositoryJpa implements CommentRepository {
         Query query = em.createQuery("delete from Comment c where c.id = :id");
         query.setParameter("id", id);
         query.executeUpdate();
+        em.clear();
     }
 
     @Override
@@ -58,5 +57,6 @@ public class CommentRepositoryJpa implements CommentRepository {
         Query query = em.createQuery("delete from Comment c where c.bookId = :bookId");
         query.setParameter("bookId", bookId);
         query.executeUpdate();
+        em.clear();
     }
 }

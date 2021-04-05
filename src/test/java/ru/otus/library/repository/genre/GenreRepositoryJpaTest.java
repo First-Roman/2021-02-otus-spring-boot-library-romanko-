@@ -9,6 +9,8 @@ import ru.otus.library.models.Genre;
 
 import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -58,6 +60,6 @@ class GenreRepositoryJpaTest {
     void deleteByIdTest() {
         assertThatCode(() -> genreRepository.findById(EXCEPTED_ID_CLASSIC)).doesNotThrowAnyException();
         genreRepository.deleteById(EXCEPTED_ID_CLASSIC);
-        assertThatThrownBy(() -> genreRepository.findById(EXCEPTED_ID_CLASSIC)).isInstanceOf(NoResultException.class);
+        assertThatThrownBy(() -> Optional.ofNullable(genreRepository.findById(EXCEPTED_ID_CLASSIC)).orElseThrow()).isInstanceOf(NoSuchElementException.class);
     }
 }

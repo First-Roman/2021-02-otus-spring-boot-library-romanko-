@@ -59,17 +59,21 @@ public class LibraryServiceShell implements LibraryService {
 
     @Override
     public void deleteBook(long id) {
+        Book book = bookService.getBookById(id);
         bookService.deleteBookById(id);
         System.out.println("Book deleted!");
+        printBook(book);
     }
 
     @Override
+    @Transactional
     public void readBookById(long id) {
         Book book = bookService.getBookById(id);
         printBook(book);
     }
 
     @Override
+    @Transactional
     public void readBookByTitle(String title) {
         List<Book> books = bookService.getBookByTitle(title);
         if (books.size() > 0) {

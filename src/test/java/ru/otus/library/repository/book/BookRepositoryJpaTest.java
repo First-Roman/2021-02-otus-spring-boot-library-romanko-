@@ -15,6 +15,8 @@ import ru.otus.library.models.Genre;
 import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -32,7 +34,7 @@ class BookRepositoryJpaTest {
     public static final String EXCEPTED_NEW_TITLE = "Анна каренина";
     public static final int ACTUAL_ID = 1;
     public static final String EXCEPTED_TITLE_WIN = "Война и мир";
-    public static final int EXCEPTED_SIZE = 4;
+    public static final int EXCEPTED_SIZE = 3;
     public static final int EXPECTED_COUNT_QUERY = 1;
 
     @Autowired
@@ -106,6 +108,6 @@ class BookRepositoryJpaTest {
     void deleteByIdTest() {
         assertThatCode(() -> bookRepository.findById(ACTUAL_ID)).doesNotThrowAnyException();
         bookRepository.deleteById(ACTUAL_ID);
-        assertThatThrownBy(() -> bookRepository.findById(ACTUAL_ID)).isInstanceOf(NoResultException.class);
+        assertThatThrownBy(() -> Optional.ofNullable(bookRepository.findById(ACTUAL_ID)).orElseThrow()).isInstanceOf(NoSuchElementException.class);
     }
 }

@@ -14,4 +14,5 @@ public interface BookRepository {
     List<Book> findByTitle(String title);
 
     void deleteById(long id);
+
 }

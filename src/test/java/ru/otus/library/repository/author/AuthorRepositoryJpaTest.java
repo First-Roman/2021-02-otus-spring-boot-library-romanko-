@@ -9,6 +9,8 @@ import ru.otus.library.models.Author;
 
 import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -61,6 +63,6 @@ class AuthorRepositoryJpaTest {
     void deleteByIdTest() {
         assertThatCode(() -> authorRepository.findById(ACTUAL_AUTHOR_ID)).doesNotThrowAnyException();
         authorRepository.deleteById(ACTUAL_AUTHOR_ID);
-        assertThatThrownBy(() -> authorRepository.findById(ACTUAL_AUTHOR_ID)).isInstanceOf(NoResultException.class);
+        assertThatThrownBy(() -> Optional.ofNullable(authorRepository.findById(ACTUAL_AUTHOR_ID)).orElseThrow()).isInstanceOf(NoSuchElementException.class);
     }
 }

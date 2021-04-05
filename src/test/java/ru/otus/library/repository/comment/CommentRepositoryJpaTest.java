@@ -9,6 +9,8 @@ import ru.otus.library.models.Comment;
 
 import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -75,7 +77,7 @@ class CommentRepositoryJpaTest {
     void deleteByIdTest() {
         assertThatCode(() -> commentRepository.findById(EXCEPTED_ID)).doesNotThrowAnyException();
         commentRepository.deleteById(EXCEPTED_ID);
-        assertThatThrownBy(() -> commentRepository.findById(EXCEPTED_ID)).isInstanceOf(NoResultException.class);
+        assertThatThrownBy(() -> Optional.ofNullable(commentRepository.findById(EXCEPTED_ID)).orElseThrow()).isInstanceOf(NoSuchElementException.class);
     }
 
     @Test

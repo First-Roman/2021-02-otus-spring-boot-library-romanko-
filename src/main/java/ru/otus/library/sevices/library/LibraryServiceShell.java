@@ -46,6 +46,7 @@ public class LibraryServiceShell implements LibraryService {
     }
 
     @Override
+    @Transactional
     public void updateBook(long bookId, long authorId, long genreId, String title) {
         Author author = authorService.getAuthorById(authorId);
         Genre genre = genreService.getGenreById(genreId);
@@ -58,22 +59,21 @@ public class LibraryServiceShell implements LibraryService {
     }
 
     @Override
+    @Transactional
     public void deleteBook(long id) {
-        Book book = bookService.getBookById(id);
         bookService.deleteBookById(id);
         System.out.println("Book deleted!");
-        printBook(book);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void readBookById(long id) {
         Book book = bookService.getBookById(id);
         printBook(book);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void readBookByTitle(String title) {
         List<Book> books = bookService.getBookByTitle(title);
         if (books.size() > 0) {
@@ -107,6 +107,7 @@ public class LibraryServiceShell implements LibraryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void readAllBooks() {
         List<Book> books = bookService.getAllBook();
         if (books.size() > 0) {
@@ -141,12 +142,14 @@ public class LibraryServiceShell implements LibraryService {
     }
 
     @Override
+    @Transactional
     public void deleteCommentById(long id) {
         commentService.deleteCommentById(id);
         System.out.println("Comment deleted!");
     }
 
     @Override
+    @Transactional
     public void deleteAllCommentByBookId(long bookId) {
         commentService.deleteCommentByBookId(bookId);
         System.out.println("All comments on the book have been deleted!");

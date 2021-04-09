@@ -2,7 +2,6 @@ package ru.otus.library.sevices.comment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.library.models.Comment;
 import ru.otus.library.repository.comment.CommentRepository;
 
@@ -16,7 +15,6 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    @Transactional
     public void addComment(String comment, String nikName, long bookId) {
         Comment cm = new Comment(0, comment, nikName, bookId);
         commentRepository.save(cm);
@@ -38,19 +36,16 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public void updateComment(Comment comment) {
         commentRepository.save(comment);
     }
 
     @Override
-    @Transactional
     public void deleteCommentById(long id) {
         commentRepository.deleteById(id);
     }
 
     @Override
-    @Transactional
     public void deleteCommentByBookId(long bookId) {
         commentRepository.deleteByBookId(bookId);
     }

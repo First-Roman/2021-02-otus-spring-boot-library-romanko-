@@ -2,7 +2,6 @@ package ru.otus.library.sevices.author;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.library.models.Author;
 import ru.otus.library.repository.author.AuthorRepository;
 
@@ -15,7 +14,6 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
 
     @Override
-    @Transactional
     public void addAuthor(String firstName, String lastName, String middleName) {
         Author author = new Author(0, firstName, lastName, middleName);
         authorRepository.save(author);
@@ -32,7 +30,6 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    @Transactional
     public void deleteAuthorById(long id) {
         authorRepository.deleteById(id);
     }

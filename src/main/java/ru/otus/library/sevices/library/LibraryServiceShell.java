@@ -1,127 +1,98 @@
 package ru.otus.library.sevices.library;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.otus.library.domain.Author;
-import ru.otus.library.domain.Book;
-import ru.otus.library.domain.Genre;
+import org.springframework.transaction.annotation.Transactional;
+import ru.otus.library.models.Author;
+import ru.otus.library.models.Book;
+import ru.otus.library.models.Comment;
+import ru.otus.library.models.Genre;
 import ru.otus.library.sevices.author.AuthorService;
 import ru.otus.library.sevices.book.BookService;
+import ru.otus.library.sevices.comment.CommentService;
 import ru.otus.library.sevices.genre.GenreService;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class LibraryServiceShell implements LibraryService {
     private final AuthorService authorService;
     private final GenreService genreService;
     private final BookService bookService;
+    private final CommentService commentService;
 
     @Override
+    @Transactional
     public void addAuthor(String firstName, String lastName, String middleName) {
         authorService.addAuthor(firstName, lastName, middleName);
-        System.out.println("Author add, success!");
+        System.out.println("New author added!");
     }
 
     @Override
+    @Transactional
     public void addGenre(String genreName) {
         genreService.addGenre(genreName);
-        System.out.println("Genre add, success!");
+        System.out.println("New genre added!");
     }
 
     @Override
+    @Transactional
     public void addBook(String title, long authorId, long genreId) {
-        Author author = null;
-        Genre genre = null;
-        try {
-            author = authorService.getAuthorById(authorId);
-        } catch (Exception e) {
-            System.out.println("We don't have an author with this id!");
-        }
-        try {
-            genre = genreService.getGenreById(genreId);
-        } catch (Exception e) {
-            System.out.println("We don't have an genre with this id!");
-        }
-        if (author != null && genre != null) {
-            bookService.addBook(title, author, genre);
-            System.out.println("Book add, success!");
-        } else {
-            System.out.println("Book add, fail!");
-        }
+        Author author = authorService.getAuthorById(authorId);
+        Genre genre = genreService.getGenreById(genreId);
+        bookService.addBook(title, author, genre);
+        System.out.println("New book added!");
     }
 
     @Override
     public void updateBook(long bookId, long authorId, long genreId, String title) {
-        Author author = null;
-        Genre genre = null;
-        Book book = null;
-        try {
-            author = authorService.getAuthorById(authorId);
-        } catch (Exception e) {
-            System.out.println("We don't have an author with this id!");
-        }
-        try {
-            genre = genreService.getGenreById(genreId);
-        } catch (Exception e) {
-            System.out.println("We don't have an genre with this id!");
-        }
-        try {
-            book = bookService.getBookById(bookId);
-        } catch (Exception e) {
-            System.out.println("We don't have an book with this id!");
-        }
-        if (author != null && genre != null && book != null) {
-            book.setTitle(title);
-            book.setAuthor(author);
-            book.setGenre(genre);
-            bookService.updateBook(book);
-            System.out.println("Book update, success!");
-        } else {
-            System.out.println("Book update, fail!");
-        }
+        Author author = authorService.getAuthorById(authorId);
+        Genre genre = genreService.getGenreById(genreId);
+        Book book = bookService.getBookById(bookId);
+        book.setAuthor(author);
+        book.setGenre(genre);
+        book.setTitle(title);
+        bookService.updateBook(book);
+        System.out.println("The book is updated!");
     }
-
 
     @Override
     public void deleteBook(long id) {
+        Book book = bookService.getBookById(id);
         bookService.deleteBookById(id);
+        System.out.println("Book deleted!");
+        printBook(book);
     }
 
     @Override
+    @Transactional
     public void readBookById(long id) {
-        try {
-            Book book = bookService.getBookById(id);
-            printBook(book);
-        } catch (Exception e) {
-            System.out.println("We don't have any books with that id");
-        }
-
+        Book book = bookService.getBookById(id);
+        printBook(book);
     }
 
     @Override
+    @Transactional
     public void readBookByTitle(String title) {
         List<Book> books = bookService.getBookByTitle(title);
         if (books.size() > 0) {
-            books.stream().forEach(book -> {
+            books.forEach(book -> {
                 printBook(book);
             });
         } else {
-            System.out.println("We don't have any books with that title");
+            System.out.println("We don't have any books with that title ;(");
         }
-
     }
 
     @Override
     public void readAllAuthor() {
         List<Author> authors = authorService.getAllAuthor();
         if (authors.size() > 0) {
-            authors.stream().forEach(author -> {
-                System.out.println("Author id: " + author.getId() + ". Full name: " + author.getLastName() + " " + author.getFirstName() + " " + author.getMiddleName());
+            authors.forEach(author -> {
+                String shotName = getShotName(author);
+                System.out.printf("Author id: %d. Author name: %s \n", author.getId(), shotName);
             });
-        } else {
-            System.out.println("We don't have any authors");
         }
     }
 
@@ -129,11 +100,9 @@ public class LibraryServiceShell implements LibraryService {
     public void readAllGenre() {
         List<Genre> genres = genreService.getAllGenre();
         if (genres.size() > 0) {
-            genres.stream().forEach(genre -> {
-                System.out.println("Genre id: " + genre.getId() + ". Genre name: " + genre.getGenreName());
+            genres.forEach(genre -> {
+                System.out.printf("Genre id: %d. Genre name: %s \n", genre.getId(), genre.getGenreName());
             });
-        } else {
-            System.out.println("We don't have any authors");
         }
     }
 
@@ -141,16 +110,67 @@ public class LibraryServiceShell implements LibraryService {
     public void readAllBooks() {
         List<Book> books = bookService.getAllBook();
         if (books.size() > 0) {
-            books.stream().forEach(book -> {
+            books.forEach(book -> {
                 printBook(book);
             });
         } else {
-            System.out.println("We don't have any books in library");
+            System.out.println("We don't have any books ;(");
         }
     }
 
+    @Override
+    public void readCommentByBookId(long bookId) {
+        List<Comment> comments = commentService.getAllCommentForBook(bookId);
+        if (comments.size() > 0) {
+            printComments(comments);
+        } else {
+            System.out.println("This book has no comments ;(");
+        }
+    }
+
+    @Override
+    public void readCommentById(long id) {
+        Comment comment = commentService.getCommentById(id);
+        printComment(comment);
+    }
+
+    @Override
+    public void addComment(String comment, String nikName, long bookId) {
+        commentService.addComment(comment, nikName, bookId);
+        System.out.println("New comment add!");
+    }
+
+    @Override
+    public void deleteCommentById(long id) {
+        commentService.deleteCommentById(id);
+        System.out.println("Comment deleted!");
+    }
+
+    @Override
+    public void deleteAllCommentByBookId(long bookId) {
+        commentService.deleteCommentByBookId(bookId);
+        System.out.println("All comments on the book have been deleted!");
+    }
+
     private void printBook(Book book) {
-        String shotName = book.getAuthor().getLastName() + " " + book.getAuthor().getFirstName().substring(0, 1).toUpperCase() + "." + book.getAuthor().getMiddleName().substring(0, 1).toUpperCase();
-        System.out.printf("Thea book id: %d titled: %s. Author: %s. Genre %s \n", book.getId(), book.getTitle(), shotName, book.getGenre().getGenreName());
+        String shotName = getShotName(book.getAuthor());
+        System.out.printf("The book id: %d. Title:| %s. | Author: %s. Genre: %s. \n", book.getId(), book.getTitle(), shotName, book.getGenre().getGenreName());
+        if (book.getComments().size() > 0) {
+            printComments(book.getComments());
+        }
+    }
+
+    private void printComments(List<Comment> comments) {
+        comments.forEach(c -> {
+            printComment(c);
+        });
+    }
+
+    private void printComment(Comment c) {
+        System.out.printf("Comment id: %d | %s. | Author comment: %s \n", c.getId(), c.getComment(), c.getNikName());
+    }
+
+    private String getShotName(Author author) {
+        return author.getLastName() + " " + author.getFirstName().substring(0, 1).toUpperCase() + "." + author.getMiddleName().substring(0, 1).toUpperCase() + ".";
     }
 }

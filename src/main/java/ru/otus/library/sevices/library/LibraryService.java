@@ -20,4 +20,14 @@ public interface LibraryService {
     void readAllGenre();
 
     void readAllBooks();
+
+    void readCommentByBookId(long bookId);
+
+    void readCommentById(long id);
+
+    void addComment(String comment, String nikName, long bookId);
+
+    void deleteCommentById(long id);
+
+    void deleteAllCommentByBookId(long bookId);
 }

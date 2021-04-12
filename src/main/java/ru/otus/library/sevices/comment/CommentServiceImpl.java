@@ -22,7 +22,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment getCommentById(long id) {
-        return commentRepository.findById(id);
+        return commentRepository.findById(id).orElseThrow();
     }
 
     @Override

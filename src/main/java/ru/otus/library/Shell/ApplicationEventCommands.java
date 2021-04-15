@@ -22,7 +22,7 @@ public class ApplicationEventCommands {
     }
 
     @ShellMethod(value = "Add new book in format (Title AuthorId GenreId)", key = {"ab", "add_book", "addBook"})
-    void addBook(@ShellOption String title, @ShellOption long authorId, @ShellOption long genreId) {
+    void addBook(@ShellOption String title, @ShellOption String authorId, @ShellOption String genreId) {
         libraryService.addBook(title, authorId, genreId);
     }
 
@@ -43,7 +43,7 @@ public class ApplicationEventCommands {
 
 
     @ShellMethod(value = "Read book by id", key = {"rbi", "read_book_by_id"})
-    public void readBookById(@ShellOption long id) {
+    public void readBookById(@ShellOption String id) {
         libraryService.readBookById(id);
     }
 
@@ -53,32 +53,32 @@ public class ApplicationEventCommands {
     }
 
     @ShellMethod(value = "Read comment for book by id", key = {"rcb", "read_comment_book_id"})
-    public void readCommentByBookId(@ShellOption long bookId) {
+    public void readCommentByBookId(@ShellOption String bookId) {
         libraryService.readCommentByBookId(bookId);
     }
 
     @ShellMethod(value = "Add comment to book in format ('comment' 'you nik name' 'book id')", key = {"acb", "add_comment_book"})
-    public void addComment(@ShellOption String comment, @ShellOption String nikName, @ShellOption long bookId) {
+    public void addComment(@ShellOption String comment, @ShellOption String nikName, @ShellOption String bookId) {
         libraryService.addComment(comment, nikName, bookId);
     }
 
     @ShellMethod(value = "Read comment by id", key = {"rci", "read_comment_by_id"})
-    public void readCommentById(@ShellOption long id) {
+    public void readCommentById(@ShellOption String id) {
         libraryService.readCommentById(id);
     }
 
     @ShellMethod(value = "Delete all comment about book by id", key = {"dcb", "delete_comment_by_book_id"})
-    public void deleteCommentByBookId(@ShellOption long bookId) {
+    public void deleteCommentByBookId(@ShellOption String bookId) {
         libraryService.deleteAllCommentByBookId(bookId);
     }
 
     @ShellMethod(value = "Delete book by id", key = {"dbi", "delete_book_by_id"})
-    public void deleteBookById(@ShellOption long id) {
+    public void deleteBookById(@ShellOption String id) {
         libraryService.deleteBook(id);
     }
 
     @ShellMethod(value = "Update book in format ('New Title' bookId authorId genreId)", key = {"ubi", "update_book_by_id"})
-    public void updateBookById(@ShellOption String newTitle, @ShellOption long bookId, @ShellOption long authorId, @ShellOption long genreId) {
+    public void updateBookById(@ShellOption String newTitle, @ShellOption String bookId, @ShellOption String authorId, @ShellOption String genreId) {
         libraryService.updateBook(bookId, authorId, genreId, newTitle);
     }
 

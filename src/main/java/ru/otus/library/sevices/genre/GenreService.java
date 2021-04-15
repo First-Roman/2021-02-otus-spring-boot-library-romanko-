@@ -7,9 +7,9 @@ import java.util.List;
 public interface GenreService {
     void addGenre(String genreName);
 
-    Genre getGenreById(long id);
+    Genre getGenreById(String id);
 
     List<Genre> getAllGenre();
 
-    void deleteGenreById(long id);
+    void deleteGenreById(String id);
 }

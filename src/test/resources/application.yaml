@@ -1,14 +1,10 @@
 spring:
-  datasource:
-    url: jdbc:h2:mem:testdb
-    initialization-mode: always
-    data: data-test.sql
+  data:
+    mongodb:
+      port: 0
+      database: test
 
-  jpa:
-     generate-ddl: false
-     hibernate:
-       ddl-auto: none
-     show-sql: true
-  shell:
-    interactive:
-     enabled: false
+mongock:
+  runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - ru.otus.library.mongock.changelog

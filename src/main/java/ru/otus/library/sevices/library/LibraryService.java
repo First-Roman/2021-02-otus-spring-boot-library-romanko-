@@ -5,13 +5,13 @@ public interface LibraryService {
 
     void addGenre(String genreName);
 
-    void addBook(String title, long authorId, long genreId);
+    void addBook(String title, String authorId, String genreId);
 
-    void updateBook(long bookId, long authorId, long genreId, String title);
+    void updateBook(String bookId, String authorId, String genreId, String title);
 
-    void deleteBook(long id);
+    void deleteBook(String id);
 
-    void readBookById(long id);
+    void readBookById(String id);
 
     void readBookByTitle(String title);
 
@@ -21,13 +21,13 @@ public interface LibraryService {
 
     void readAllBooks();
 
-    void readCommentByBookId(long bookId);
+    void readCommentByBookId(String bookId);
 
-    void readCommentById(long id);
+    void readCommentById(String id);
 
-    void addComment(String comment, String nikName, long bookId);
+    void addComment(String comment, String nikName, String bookId);
 
-    void deleteCommentById(long id);
+    void deleteCommentById(String id);
 
-    void deleteAllCommentByBookId(long bookId);
+    void deleteAllCommentByBookId(String bookId);
 }

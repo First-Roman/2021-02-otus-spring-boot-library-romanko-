@@ -15,12 +15,15 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void addAuthor(String firstName, String lastName, String middleName) {
-        Author author = new Author(0, firstName, lastName, middleName);
+        Author author = new Author();
+        author.setFirstName(firstName);
+        author.setMiddleName(middleName);
+        author.setLastName(lastName);
         authorRepository.save(author);
     }
 
     @Override
-    public Author getAuthorById(long id) {
+    public Author getAuthorById(String id) {
         return authorRepository.findById(id).orElseThrow();
     }
 
@@ -30,7 +33,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void deleteAuthorById(long id) {
+    public void deleteAuthorById(String id) {
         authorRepository.deleteById(id);
     }
 }

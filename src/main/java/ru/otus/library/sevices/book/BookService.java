@@ -1,5 +1,6 @@
 package ru.otus.library.sevices.book;
 
+import ru.otus.library.dto.BookDTO;
 import ru.otus.library.models.Author;
 import ru.otus.library.models.Book;
 import ru.otus.library.models.Genre;
@@ -15,7 +16,7 @@ public interface BookService {
 
     List<Book> getAllBook();
 
-    void updateBook(Book book);
+    void updateBook(Book Book);
 
     void deleteBookById(long id);
 }

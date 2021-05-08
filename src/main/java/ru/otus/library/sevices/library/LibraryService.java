@@ -1,33 +1,42 @@
 package ru.otus.library.sevices.library;
 
+import ru.otus.library.dto.AuthorDTO;
+import ru.otus.library.dto.BookDTO;
+import ru.otus.library.dto.GenreDTO;
+import ru.otus.library.models.Author;
+import ru.otus.library.models.Book;
+import ru.otus.library.models.Genre;
+
+import java.util.List;
+
 public interface LibraryService {
-    void addAuthor(String firstName, String lastName, String middleName);
+    List<Book> getAllBook();
 
-    void addGenre(String genreName);
+    List<Genre> getAllGenre();
 
-    void addBook(String title, long authorId, long genreId);
+    List<Author> getAllAuthor();
 
-    void updateBook(long bookId, long authorId, long genreId, String title);
+    Book getBookById(long id);
 
-    void deleteBook(long id);
+    Author getAuthorById(long id);
 
-    void readBookById(long id);
+    Genre getGenreById(long id);
 
-    void readBookByTitle(String title);
+    void addBook(BookDTO bookDTO);
 
-    void readAllAuthor();
+    void addGenre(GenreDTO genreDTO);
 
-    void readAllGenre();
+    void addAuthor(AuthorDTO authorDTO);
 
-    void readAllBooks();
+    void updateBook(BookDTO bookDTO);
 
-    void readCommentByBookId(long bookId);
+    void updateGenre(GenreDTO genreDTO);
 
-    void readCommentById(long id);
+    void updateAuthor(AuthorDTO authorDTO);
 
-    void addComment(String comment, String nikName, long bookId);
+    void removeBookById(long id);
 
-    void deleteCommentById(long id);
+    void removeGenreById(long id);
 
-    void deleteAllCommentByBookId(long bookId);
+    void removeAuthorById(long id);
 }

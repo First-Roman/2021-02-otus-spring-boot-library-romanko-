@@ -15,6 +15,7 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
+
     @Override
     public void addBook(String title, Author author, Genre genre) {
         Book book = new Book(0, title, author, genre, null);
@@ -23,7 +24,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBookById(long id) {
-
         return bookRepository.findById(id).orElseThrow();
     }
 

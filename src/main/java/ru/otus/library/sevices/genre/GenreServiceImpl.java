@@ -20,6 +20,11 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    public void updateGenre(Genre genre) {
+        genreRepository.save(genre);
+    }
+
+    @Override
     public Genre getGenreById(long id) {
         return genreRepository.findById(id).orElseThrow();
     }

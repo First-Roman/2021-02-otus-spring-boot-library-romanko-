@@ -9,7 +9,6 @@ import ru.otus.library.convertor.book.ConverterListBookToListBookDTO;
 import ru.otus.library.dto.BookDTO;
 import ru.otus.library.sevices.library.LibraryService;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -51,9 +50,4 @@ public class BookAPI {
         return ResponseEntity.ok().body(Response.OK.getName());
     }
 
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity exceptionHandler(IOException e) {
-        System.out.println("Ошибка в работе сервиса  book " + e);
-        return ResponseEntity.badRequest().body(Response.BAD.getName());
-    }
 }

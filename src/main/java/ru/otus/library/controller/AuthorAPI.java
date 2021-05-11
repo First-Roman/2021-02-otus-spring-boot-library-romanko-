@@ -9,7 +9,6 @@ import ru.otus.library.convertor.author.ConverterListAuthorToListAuthorDTO;
 import ru.otus.library.dto.AuthorDTO;
 import ru.otus.library.sevices.library.LibraryService;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -51,9 +50,4 @@ public class AuthorAPI {
         return ResponseEntity.ok().body(Response.OK.getName());
     }
 
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity exceptionHandler(IOException e) {
-        System.out.println("Ошибка в работе сервиса  author " + e);
-        return ResponseEntity.badRequest().body(Response.BAD.getName());
-    }
 }

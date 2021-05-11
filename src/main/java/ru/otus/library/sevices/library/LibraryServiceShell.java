@@ -38,7 +38,7 @@ public class LibraryServiceShell implements LibraryService {
 
     @Override
     @Transactional
-    public void addBook(String title, long authorId, long genreId) {
+    public void addBook(String title, String authorId, String genreId) {
         Author author = authorService.getAuthorById(authorId);
         Genre genre = genreService.getGenreById(genreId);
         bookService.addBook(title, author, genre);
@@ -47,7 +47,7 @@ public class LibraryServiceShell implements LibraryService {
 
     @Override
     @Transactional
-    public void updateBook(long bookId, long authorId, long genreId, String title) {
+    public void updateBook(String bookId, String authorId, String genreId, String title) {
         Author author = authorService.getAuthorById(authorId);
         Genre genre = genreService.getGenreById(genreId);
         Book book = bookService.getBookById(bookId);
@@ -60,14 +60,14 @@ public class LibraryServiceShell implements LibraryService {
 
     @Override
     @Transactional
-    public void deleteBook(long id) {
+    public void deleteBook(String id) {
         bookService.deleteBookById(id);
         System.out.println("Book deleted!");
     }
 
     @Override
     @Transactional(readOnly = true)
-    public void readBookById(long id) {
+    public void readBookById(String id) {
         Book book = bookService.getBookById(id);
         printBook(book);
     }
@@ -91,7 +91,7 @@ public class LibraryServiceShell implements LibraryService {
         if (authors.size() > 0) {
             authors.forEach(author -> {
                 String shotName = getShotName(author);
-                System.out.printf("Author id: %d. Author name: %s \n", author.getId(), shotName);
+                System.out.printf("Author id: %s. Author name: %s \n", author.getId(), shotName);
             });
         }
     }
@@ -101,7 +101,7 @@ public class LibraryServiceShell implements LibraryService {
         List<Genre> genres = genreService.getAllGenre();
         if (genres.size() > 0) {
             genres.forEach(genre -> {
-                System.out.printf("Genre id: %d. Genre name: %s \n", genre.getId(), genre.getGenreName());
+                System.out.printf("Genre id: %s. Genre name: %s \n", genre.getId(), genre.getGenreName());
             });
         }
     }
@@ -120,7 +120,7 @@ public class LibraryServiceShell implements LibraryService {
     }
 
     @Override
-    public void readCommentByBookId(long bookId) {
+    public void readCommentByBookId(String bookId) {
         List<Comment> comments = commentService.getAllCommentForBook(bookId);
         if (comments.size() > 0) {
             printComments(comments);
@@ -130,37 +130,34 @@ public class LibraryServiceShell implements LibraryService {
     }
 
     @Override
-    public void readCommentById(long id) {
+    public void readCommentById(String id) {
         Comment comment = commentService.getCommentById(id);
         printComment(comment);
     }
 
     @Override
-    public void addComment(String comment, String nikName, long bookId) {
+    public void addComment(String comment, String nikName, String bookId) {
         commentService.addComment(comment, nikName, bookId);
         System.out.println("New comment add!");
     }
 
     @Override
     @Transactional
-    public void deleteCommentById(long id) {
+    public void deleteCommentById(String id) {
         commentService.deleteCommentById(id);
         System.out.println("Comment deleted!");
     }
 
     @Override
     @Transactional
-    public void deleteAllCommentByBookId(long bookId) {
+    public void deleteAllCommentByBookId(String bookId) {
         commentService.deleteCommentByBookId(bookId);
         System.out.println("All comments on the book have been deleted!");
     }
 
     private void printBook(Book book) {
         String shotName = getShotName(book.getAuthor());
-        System.out.printf("The book id: %d. Title:| %s. | Author: %s. Genre: %s. \n", book.getId(), book.getTitle(), shotName, book.getGenre().getGenreName());
-        if (book.getComments().size() > 0) {
-            printComments(book.getComments());
-        }
+        System.out.printf("The book id: %s. Title:| %s. | Author: %s. Genre: %s. \n", book.getId(), book.getTitle(), shotName, book.getGenre().getGenreName());
     }
 
     private void printComments(List<Comment> comments) {
@@ -170,7 +167,7 @@ public class LibraryServiceShell implements LibraryService {
     }
 
     private void printComment(Comment c) {
-        System.out.printf("Comment id: %d | %s. | Author comment: %s \n", c.getId(), c.getComment(), c.getNikName());
+        System.out.printf("Comment id: %s | %s. | Author comment: %s \n", c.getId(), c.getComment(), c.getNikName());
     }
 
     private String getShotName(Author author) {

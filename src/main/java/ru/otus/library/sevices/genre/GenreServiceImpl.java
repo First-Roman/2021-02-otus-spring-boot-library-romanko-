@@ -15,12 +15,13 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public void addGenre(String genreName) {
-        Genre genre = new Genre(0, genreName);
+        Genre genre = new Genre();
+        genre.setGenreName(genreName);
         genreRepository.save(genre);
     }
 
     @Override
-    public Genre getGenreById(long id) {
+    public Genre getGenreById(String id) {
         return genreRepository.findById(id).orElseThrow();
     }
 
@@ -30,7 +31,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public void deleteGenreById(long id) {
+    public void deleteGenreById(String id) {
         genreRepository.deleteById(id);
     }
 }

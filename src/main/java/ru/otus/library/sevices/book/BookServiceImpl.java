@@ -17,12 +17,15 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void addBook(String title, Author author, Genre genre) {
-        Book book = new Book(0, title, author, genre, null);
+        Book book = new Book();
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setGenre(genre);
         bookRepository.save(book);
     }
 
     @Override
-    public Book getBookById(long id) {
+    public Book getBookById(String id) {
 
         return bookRepository.findById(id).orElseThrow();
     }
@@ -43,7 +46,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBookById(long id) {
+    public void deleteBookById(String id) {
         bookRepository.deleteById(id);
     }
 }

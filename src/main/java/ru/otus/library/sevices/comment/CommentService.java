@@ -5,17 +5,17 @@ import ru.otus.library.models.Comment;
 import java.util.List;
 
 public interface CommentService {
-    void addComment(String comment, String nikName, long bookId);
+    void addComment(String comment, String nikName, String bookId);
 
-    Comment getCommentById(long id);
+    Comment getCommentById(String id);
 
     List<Comment> getAllComment();
 
-    List<Comment> getAllCommentForBook(long bookId);
+    List<Comment> getAllCommentForBook(String bookId);
 
     void updateComment(Comment comment);
 
-    void deleteCommentById(long id);
+    void deleteCommentById(String id);
 
-    void deleteCommentByBookId(long bookId);
+    void deleteCommentByBookId(String bookId);
 }

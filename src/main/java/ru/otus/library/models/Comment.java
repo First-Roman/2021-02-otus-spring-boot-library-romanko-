@@ -1,27 +1,22 @@
 package ru.otus.library.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Entity
-@Table(name = "comments")
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
+@Document(collection = "comments")
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
-    @Column(name = "comment")
     private String comment;
 
-    @Column(name = "nik_name")
     private String nikName;
 
-    @Column(name = "book_id")
-    private long bookId;
+    private String bookId;
 }

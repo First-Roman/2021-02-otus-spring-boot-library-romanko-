@@ -35,3 +35,10 @@ nik_name varchar(50),
 book_id number,
 constraint fk_book_id foreign key (book_id) references books(id) on delete cascade
 );
+
+create table user
+(
+id number auto_increment primary key not null,
+name varchar(200),
+password varchar(200)
+);

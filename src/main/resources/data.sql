@@ -31,3 +31,6 @@ values (2,'Nice!','DAN',1);
 
 insert into comments (id , comment, nik_name, book_id )
 values (3,'Завораживающи!','DAN',3);
+
+insert into user (id, name, password)
+values (1,'admin','pass');

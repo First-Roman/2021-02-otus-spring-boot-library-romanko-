@@ -2,6 +2,7 @@ package ru.otus.library.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.library.controller.simple.Response;
 import ru.otus.library.convertor.genre.ConverterGenreToGenreDTO;
@@ -20,31 +21,41 @@ public class GenreAPI {
     private final ConverterGenreToGenreDTO genreToGenreDTO;
     private final ConverterListGenreToListGenreDTO listGenreToListGenreDTO;
 
+
     @GetMapping("/all")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity getAllGenre() {
         List<GenreDTO> genreDTOS = listGenreToListGenreDTO.convert(libraryService.getAllGenre());
         return ResponseEntity.ok().body(genreDTOS);
     }
 
+
     @GetMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity getGenreById(@PathVariable("id") long id) {
         GenreDTO genreDTO = genreToGenreDTO.convert(libraryService.getGenreById(id));
         return ResponseEntity.ok().body(genreDTO);
     }
 
+
     @PutMapping(value = "/edit", consumes = {"multipart/form-data"})
+    @Secured("ROLE_ADMIN")
     public ResponseEntity updateGenre(GenreDTO genreDTO) {
         libraryService.updateGenre(genreDTO);
         return ResponseEntity.ok().body(Response.OK.getName());
     }
 
+
     @PostMapping(value = "/add", consumes = {"multipart/form-data"})
+    @Secured("ROLE_ADMIN")
     public ResponseEntity addGenre(GenreDTO genreDTO) {
         libraryService.addGenre(genreDTO);
         return ResponseEntity.ok().body(Response.OK.getName());
     }
 
+
     @DeleteMapping(value = "/del/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity deleteGenre(@PathVariable("id") long id) {
         libraryService.removeGenreById(id);
         return ResponseEntity.ok().body(Response.OK.getName());

@@ -42,3 +42,17 @@ id number auto_increment primary key not null,
 name varchar(200),
 password varchar(200)
 );
+
+create table role
+(
+id number auto_increment primary key not null,
+role varchar(200)
+);
+
+create table user_role
+(
+user_id number,
+role_id number,
+constraint fk_user_id foreign key (user_id) references user(id),
+constraint fk_role_id foreign key (role_id) references role(id)
+);

@@ -33,4 +33,18 @@ insert into comments (id , comment, nik_name, book_id )
 values (3,'Завораживающи!','DAN',3);
 
 insert into user (id, name, password)
-values (1,'admin','pass');
+values (1,'admin','password');
+
+insert into user (id, name, password)
+values (2,'user','password');
+
+insert into role (id, role)
+values (1,'ROLE_USER');
+
+insert into role (id, role)
+values (2,'ROLE_ADMIN');
+
+insert into user_role (user_id, role_id)
+values (1,2);
+insert into user_role (user_id, role_id)
+values (2,1);

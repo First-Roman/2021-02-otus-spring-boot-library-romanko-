@@ -15,13 +15,16 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public void addComment(String comment, String nikName, long bookId) {
-        Comment cm = new Comment(0, comment, nikName, bookId);
+    public void addComment(String comment, String nikName, String bookId) {
+        Comment cm = new Comment();
+        cm.setComment(comment);
+        cm.setNikName(nikName);
+        cm.setBookId(bookId);
         commentRepository.save(cm);
     }
 
     @Override
-    public Comment getCommentById(long id) {
+    public Comment getCommentById(String id) {
         return commentRepository.findById(id).orElseThrow();
     }
 
@@ -31,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> getAllCommentForBook(long bookId) {
+    public List<Comment> getAllCommentForBook(String bookId) {
         return commentRepository.findAllByBookId(bookId);
     }
 
@@ -41,12 +44,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteCommentById(long id) {
+    public void deleteCommentById(String id) {
         commentRepository.deleteById(id);
     }
 
     @Override
-    public void deleteCommentByBookId(long bookId) {
+    public void deleteCommentByBookId(String bookId) {
         commentRepository.deleteByBookId(bookId);
     }
 }

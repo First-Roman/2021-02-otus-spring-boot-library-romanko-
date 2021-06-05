@@ -10,7 +10,7 @@ import java.util.List;
 public interface BookService {
     void addBook(String title, Author author, Genre genre);
 
-    Book getBookById(long id);
+    Book getBookById(String id);
 
     List<Book> getBookByTitle(String title);
 
@@ -18,5 +18,5 @@ public interface BookService {
 
     void updateBook(Book Book);
 
-    void deleteBookById(long id);
+    void deleteBookById(String id);
 }

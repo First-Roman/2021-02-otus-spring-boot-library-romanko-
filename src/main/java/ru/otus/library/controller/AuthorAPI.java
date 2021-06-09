@@ -2,7 +2,6 @@ package ru.otus.library.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.library.controller.simple.Response;
@@ -24,7 +23,6 @@ public class AuthorAPI {
 
 
     @GetMapping("/all")
-    @Secured("ROLE_ADMIN")
     public ResponseEntity getAllAuthor() {
         List<AuthorDTO> authorDTOS = listAuthorToListAuthorDTO.convert(libraryService.getAllAuthor());
         return ResponseEntity.ok().body(authorDTOS);
@@ -32,7 +30,6 @@ public class AuthorAPI {
 
 
     @GetMapping("/{id}")
-    @Secured("ROLE_ADMIN")
     public ResponseEntity getAuthorById(@PathVariable("id") long id) {
         AuthorDTO authorDTO = authorToAuthorDTO.convert(libraryService.getAuthorById(id));
         return ResponseEntity.ok().body(authorDTO);
@@ -40,7 +37,6 @@ public class AuthorAPI {
 
 
     @PutMapping(value = "/edit", consumes = {"multipart/form-data"})
-    @Secured("ROLE_ADMIN")
     public ResponseEntity updateAuthor(AuthorDTO authorDTO) {
         libraryService.updateAuthor(authorDTO);
         return ResponseEntity.ok().body(Response.OK.getName());
@@ -48,7 +44,6 @@ public class AuthorAPI {
 
 
     @PostMapping(value = "/add", consumes = {"multipart/form-data"})
-    @Secured("ROLE_ADMIN")
     public ResponseEntity addAuthor(AuthorDTO authorDTO) {
         libraryService.addAuthor(authorDTO);
         return ResponseEntity.ok().body(Response.OK.getName());
@@ -56,7 +51,6 @@ public class AuthorAPI {
 
 
     @DeleteMapping(value = "/del/{id}")
-    @Secured("ROLE_ADMIN")
     public ResponseEntity deleteAuthor(@PathVariable("id") long id) {
         libraryService.removeAuthorById(id);
         return ResponseEntity.ok().body(Response.OK.getName());

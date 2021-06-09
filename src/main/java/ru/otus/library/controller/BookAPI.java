@@ -2,7 +2,6 @@ package ru.otus.library.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.library.controller.simple.Response;
 import ru.otus.library.convertor.book.ConverterBookToBookDTO;
@@ -29,21 +28,18 @@ public class BookAPI {
     }
 
     @GetMapping(value = "/{id}")
-    @Secured("ROLE_ADMIN")
     public ResponseEntity getBookById(@PathVariable("id") long id) {
         BookDTO bookDTO = bookToBookDTO.convert(libraryService.getBookById(id));
         return ResponseEntity.ok().body(bookDTO);
     }
 
     @PutMapping(value = "/edit", consumes = {"multipart/form-data"})
-    @Secured("ROLE_ADMIN")
     public ResponseEntity updateBook(BookDTO bookDTO) {
         libraryService.updateBook(bookDTO);
         return ResponseEntity.ok().body(Response.OK.getName());
     }
 
     @PostMapping(value = "/add", consumes = {"multipart/form-data"})
-    @Secured("ROLE_ADMIN")
     public ResponseEntity addBook(BookDTO bookDTO) {
         libraryService.addBook(bookDTO);
         return ResponseEntity.ok().body(Response.OK.getName());
@@ -51,7 +47,6 @@ public class BookAPI {
 
 
     @DeleteMapping(value = "/del/{id}")
-    @Secured("ROLE_ADMIN")
     public ResponseEntity delBook(@PathVariable("id") long id) {
         libraryService.removeBookById(id);
         return ResponseEntity.ok().body(Response.OK.getName());

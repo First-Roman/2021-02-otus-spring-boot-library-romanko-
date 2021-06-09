@@ -2,7 +2,6 @@ package ru.otus.library.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.library.controller.simple.Response;
 import ru.otus.library.convertor.author.ConverterAuthorToAuthorDTO;
@@ -12,7 +11,7 @@ import ru.otus.library.sevices.library.LibraryService;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(value = "/api/author", produces = "application/json")
 @RequiredArgsConstructor
 public class AuthorAPI {

@@ -22,3 +22,5 @@ management:
   health:
     defaults:
       enabled: true
+server:
+  max-http-header-size: 5MB

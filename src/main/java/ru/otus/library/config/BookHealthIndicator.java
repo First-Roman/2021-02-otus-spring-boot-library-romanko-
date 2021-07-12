@@ -10,11 +10,10 @@ import ru.otus.library.repository.book.BookRepository;
 @Component
 public class BookHealthIndicator implements HealthIndicator {
 
-    private  BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     @Override
     public Health health() {
-        System.out.println("I work like as");
         int size = bookRepository.findAll().size();
         if (size > 0) {
             return Health.up().withDetail("message", "Everything is fine, the books are in place!").build();
